@@ -1,0 +1,2 @@
+Utilities to manage Emacs windows. Under development.
+
