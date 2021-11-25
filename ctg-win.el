@@ -1,4 +1,4 @@
-;;; ctg-win.el -*- lexical-binding: t; -*-
+;; ctg-wn.el -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;; Utilities to manipulate windows
@@ -11,14 +11,24 @@
 (defvar ctg-win--window-configs (ht-create)
   "Saved window configs")
 
+(defvar ctg-win--window-config-counter 0
+  "Counter for windows config default name")
+
 (defsubst ctg-win--create-winconf (name conf pt)
   (ht<-plist (list :name name :conf conf :point pt)))
+
+(defsubst ctg-win--create-config-name ()
+  (setq ctg-win--window-config-counter (1+ ctg-win--window-config-counter))
+  (format "<window-config-%d>" ctg-win--window-config-counter))
+
+(defsubst ctg-win--read-config-name ()
+  (ivy-read "Window configuration identifier: " (list (ctg-win--create-config-name))))
 
 ;;;###autoload
 (defun ctg-win/save-window-state ()
   "Save the window state with a name"
   (interactive)
-  (let ((name (read-string "Enter config name: "))
+  (let ((name (ctg-win--read-config-name))
         (conf (current-window-configuration))
         (pt (point-marker)))
     (ht-set! ctg-win--window-configs name (ctg-win--create-winconf name conf pt))))
