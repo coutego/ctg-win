@@ -9,19 +9,19 @@
 (require 'ht)
 
 (defvar ctg-win--window-configs (ht-create)
-  "Saved window configs")
+  "Saved window configs.")
 
 (defvar ctg-win--window-config-counter 0
-  "Counter for windows config default name")
+  "Counter for windows config default name.")
 
-(defsubst ctg-win--create-winconf (name conf pt)
+(defun ctg-win--create-winconf (name conf pt)
   (ht<-plist (list :name name :conf conf :point pt)))
 
-(defsubst ctg-win--create-config-name ()
+(defun ctg-win--create-config-name ()
   (setq ctg-win--window-config-counter (1+ ctg-win--window-config-counter))
   (format "<window-config-%d>" ctg-win--window-config-counter))
 
-(defsubst ctg-win--read-config-name ()
+(defun ctg-win--read-config-name ()
   (ivy-read "Window configuration identifier: " (list (ctg-win--create-config-name))))
 
 ;;;###autoload
@@ -68,14 +68,14 @@ Based on code borrowed from a StakOverflow answer."
              (splitter (if (= (car this-win-edges) (car (window-edges (next-window))))
                            'split-window-horizontally
                          'split-window-vertically)))
-         (delete-other-windows)
-         (let ((first-win (selected-window)))
-           (funcall splitter)
-           (if this-win-2nd (other-window 1))
-           (set-window-buffer (selected-window) this-win-buffer)
-           (set-window-buffer (next-window) next-win-buffer)
-           (select-window first-win)
-           (if this-win-2nd (other-window 1))))))
+        (delete-other-windows)
+        (let ((first-win (selected-window)))
+          (funcall splitter)
+          (if this-win-2nd (other-window 1))
+          (set-window-buffer (selected-window) this-win-buffer)
+          (set-window-buffer (next-window) next-win-buffer)
+          (select-window first-win)
+          (if this-win-2nd (other-window 1))))))
 
 (provide 'ctg-win)
 
