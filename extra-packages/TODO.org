@@ -1,0 +1,12 @@
+#+TITLE: Todo
+
+* TODO Add option to delete window configs
+* TODO Organise keybindings
+- All window manipulation under "j w"
+- "j w d" -> delete window configuration
+- "j w s" -> save window configuration
+- "j w r" -> restore window configuration
+- "j w w" -> hydra window
+* TODO New configurations use name of buffers
+* TODO Have hydra to control window configurations
+
