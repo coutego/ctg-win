@@ -1,7 +1,7 @@
 #+TITLE: Todo
 
 * DONE Add option to delete window configs
-* TODO Organise keybindings
+* DONE Organise keybindings
 - All window manipulation under "j w"
 - "j w d" -> delete window configuration
 - "j w s" -> save window configuration
