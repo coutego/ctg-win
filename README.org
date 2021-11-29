@@ -1,2 +1,39 @@
-Utilities to manage Emacs windows. Under development.
+* Introduction
+This package contains some utilities to manipulate windows.
 
+First, this package allows saving window configuration with associated names.
+These configurations are local to the perspective in use. I.e. different
+perspectives get different tables of names and window configurations.
+
+There are three entry functions related to this functionality:
+
+- ctg-win-save-window-state
+- ctg-win-restore-window-state
+- ctg-win-delete-window-state
+
+Second, this package allows to change the orientation of two windows,
+from horizontal to vertical and viceversa. The related function is
+
+- ctg-win-toggle-window-split
+
+This function only has effect when there are two windows in the current frame.
+For the time being, the relative sizes are not kept and the new windows will
+have equal width (resp. height).
+
+* Configuration
+This is an example configuration, using doom's use-package!
+
+#+begin_src emacs-lisp
+(use-package! ctg-win
+  :config
+  (map! :leader
+        (:prefix ("j w" . "windows")
+         :desc "Save window state"
+         "s" #'ctg-win-save-window-state
+         :desc "Restore window state"
+         "r" #'ctg-win-restore-window-state
+         :desc "Deleted window state"
+         "d" #'ctg-win-delete-window-state
+         :desc "Toggle window split"
+         "o" #'ctg-win-toggle-window-split)))
+#+end_src
